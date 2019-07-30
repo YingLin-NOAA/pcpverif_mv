@@ -59,7 +59,7 @@ done
 run_command "cd ${BASE_DIR}"
 
 if [[ ${#LOAD_DIRS[@]} -eq 0 ]]; then
-   run_command "scp -r ./ ${USER_NAME}@${AWS_IP}:/${AWS_DATA_PATH}${USER_NAME}"
+   run_command "scp -r ./* ${USER_NAME}@${AWS_IP}:/${AWS_DATA_PATH}${USER_NAME}"
 else
 
   #copy subdirs or base_dir
