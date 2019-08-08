@@ -8,6 +8,8 @@ set -x
 # 3) load ${model}_${daym2}.vsdb for mv_ylin_pcp_erly
 # 4) load ${model}_${daym9}.vsdb for mv_ylin_pcp
 
+# also can run interactively with an argument (day0)
+
 proddell=`cat /etc/prod`
 
 if [ $proddell = mars ]; then
@@ -37,8 +39,15 @@ do
   fi
 done
 
-daym2=`date +%Y%m%d -d "2 day ago"`
-daym9=`date +%Y%m%d -d "9 day ago"`
+if [ $# -eq 0 ]; then
+  daym2=`date +%Y%m%d -d "2 day ago"`
+  daym9=`date +%Y%m%d -d "9 day ago"`
+else
+  day0=$1
+  FINDDATE=/gpfs/dell1/nco/ops/nwprod/prod_util.v1.1.2/ush/finddate.sh
+  daym2=`$FINDDATE $day0 d-2`
+  daym9=`$FINDDATE $day0 d-9`
+fi
 
 # Get erly data:
 cd $dirvsdberly
