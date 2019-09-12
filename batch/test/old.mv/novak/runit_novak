@@ -1,0 +1,2 @@
+./plt_glbfv3.sh > /metviewer/staging/wd22yl/tmp.out/batch.out 2>&1
+

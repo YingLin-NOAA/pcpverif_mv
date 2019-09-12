@@ -1,0 +1,1 @@
+./make_plots.sh 20190202 > /metviewer/staging/wd22yl/tmp.out/batch.out 2>&1
