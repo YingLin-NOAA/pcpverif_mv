@@ -68,13 +68,13 @@ done
 cd $dirvsdb
 
 # late prod: 
-for model in conusnest gfs href hrrr nam rap 
+for model in conusnest gfs hrrr nam rap 
 do
   scp Ying.Lin@${proddell}:${prodvsdbdir}/${model}/${model}_${daym9}.vsdb .
 done
 
 # late dev: 
-for model in fv3nest fv3sar fv3sarx gfsv14
+for model in fv3sar fv3sarx gfsv14 href
 do
   cp  $devvsdbdir/${model}/${model}_${daym9}.vsdb .
 done
