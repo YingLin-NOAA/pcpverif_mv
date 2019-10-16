@@ -20,12 +20,12 @@
   <load_mpr>true</load_mpr>
   <load_orank>true</load_orank>
   <force_dup_file>true</force_dup_file>
-  <group>test_ylin</group>
+  <group>NCEP_ylin</group>
   <description>Test of loading real set of data</description>
   <folder_tmpl>/base_dir/{type}</folder_tmpl>
     <load_val>
      <field name="type">
-       <val>metplus</val>
+       <val>stats.dir</val>
      </field>
     </load_val>
   <load_xml>true</load_xml>
