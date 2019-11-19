@@ -14,7 +14,7 @@ fi
 
 cd $STATSWRK/stats.dir
 
-for vday in 20191014 20191013 20191012 20191011
+for vday in 20191015 20191016 20191017 20191018 20191019
 do
   cp -p $STATSARCH/$vday/*.stat . 
 done
