@@ -14,9 +14,15 @@ fi
 
 cd $STATSWRK/stats.dir
 
-for vday in 20191015 20191016 20191017 20191018 20191019
+vday1=20191011
+vday2=20191117
+
+vday=$vday1
+
+while [ $vday -le $vday2 ]
 do
   cp -p $STATSARCH/$vday/*.stat . 
+  vday=`date -d "$vday + 1 day" +%Y%m%d`
 done
 
 # subdir under $STATS defined in the xml script: 
