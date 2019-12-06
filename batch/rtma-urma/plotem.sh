@@ -29,7 +29,7 @@ region=CNSRFCS
 
 anl1=PCPRTMA
 anl2=PCPRTMA2P8
-for drange in 20190801-20190831 20190901-20190930 20191001-20191031 20191101-20191117
+for drange in 20191101-20191130 20190801-20191130
 do 
   vday1=`echo $drange | awk -F"-" '{print $1}'`
   vday2=`echo $drange | awk -F"-" '{print $2}'`
@@ -55,7 +55,7 @@ done
 anl1=PCPURMA
 anl2=PCPURMA2P8
 
-for drange in 20190914-20190930 20191001-20191031 20191101-20191117
+for drange in 20191101-20191130
 do 
   vday1=`echo $drange | awk -F"-" '{print $1}'`
   vday2=`echo $drange | awk -F"-" '{print $2}'`
@@ -80,7 +80,7 @@ done
 anl1=ST4
 anl2=ST4X
 
-for drange in 20191011-20191031 20191101-20191117
+for drange in 20191101-20191130
 do 
   vday1=`echo $drange | awk -F"-" '{print $1}'`
   vday2=`echo $drange | awk -F"-" '{print $2}'`
