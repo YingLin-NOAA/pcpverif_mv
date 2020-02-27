@@ -25,7 +25,7 @@
         <dep>
             <dep1>
                 <fcst_var name="APCP_24">
-                    <stat>GSS</stat>
+                    <stat>FBIAS</stat>
                 </fcst_var>
             </dep1>
             <dep2/>
@@ -73,12 +73,12 @@
         </agg_stat>
         <plot_stat>median</plot_stat>
         <tmpl>
-            <data_file>rgl_%FHR%h_ets.data</data_file>
-            <plot_file>rgl_%FHR%h_ets.png</plot_file>
-            <r_file>rgl_24h_ets.R</r_file>
-            <title>24h ETS, %FHR%h fcsts valid %VDAY1% - %VDAY2%</title>
+            <data_file>rgl_%FHR%h_bias.data</data_file>
+            <plot_file>rgl_%FHR%h_bias.png</plot_file>
+            <r_file>rgl_24h_bias.R</r_file>
+            <title>24h FBIAS, %FHR%h fcsts valid %VDAY1% - %VDAY2%</title>
             <x_label>Threshold (mm/day)</x_label>
-            <y1_label>ETS/GSS</y1_label>
+            <y1_label>FBIAS</y1_label>
             <caption/>
             <job_title/>
             <keep_revisions>false</keep_revisions>
@@ -148,8 +148,9 @@
         <lwd>c(2,2,2)</lwd>
         <con_series>c(1,1,1)</con_series>
         <order_series>c(1,2,3)</order_series>
+        <plot_cmd>abline(h=1)</plot_cmd>
         <legend>c("","","")</legend>
-        <y1_lim>c(0,0.7)</y1_lim>
+        <y1_lim>c(0,3.0)</y1_lim>
         <y1_bufr>0.04</y1_bufr>
     </plot>
 </plot_spec>

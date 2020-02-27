@@ -2,11 +2,11 @@
 <plot_spec>
     <connection>
         <host>rds_host:3306</host>
-        <database>mv_ylin_metplus</database>
+        <database>mv_ylin_pcp_rtma_urma</database>
         <user>rds_user</user>
         <password>rds_pwd</password>
     </connection>
-    <rscript>/usr/bin/Rscript</rscript>
+    <rscript>Rscript</rscript>
     <folders>
         <r_tmpl>rds_R_tmpl</r_tmpl>
         <r_work>rds_R_work</r_work>
@@ -25,43 +25,42 @@
         <dep>
             <dep1>
                 <fcst_var name="APCP_24">
-                    <stat>GSS</stat>
+                    <stat>FBIAS</stat>
                 </fcst_var>
             </dep1>
             <dep2/>
         </dep>
         <series1>
             <field name="model">
-                <val>FV3SAR</val>
-                <val>FV3SARX</val>
-                <val>GFS</val>
+                <val>%ANL1%</val>
+                <val>%ANL2%</val>
+                <val>%ANL3%</val>
             </field>
         </series1>
         <series2/>
         <plot_fix>
             <field equalize="true" name="vx_mask">
-                <val>CONUS</val>
+                <set name="vx_mask_0">
+                    <val>%REGION%</val>
+                </set>
             </field>
             <field equalize="true" name="fcst_valid_beg">
                <date_range name="vtimes"/>
             </field>
-            <field equalize="true" name="fcst_lead">
-                <set name="fcst_lead_2">
-                    <val>%FHR%0000</val>
-                </set>
-            </field>
         </plot_fix>
         <plot_cond/>
         <indep equalize="true" name="obs_thresh">
-            <val label="&gt;0.25" plot_val="">&gt;0.25</val>
-            <val label="&gt;6.35" plot_val="">&gt;6.35</val>
-            <val label="&gt;12.7" plot_val="">&gt;12.7</val>
-            <val label="&gt;19.05" plot_val="">&gt;19.05</val>
-            <val label="&gt;25.4" plot_val="">&gt;25.4</val>
-            <val label="&gt;38.1" plot_val="">&gt;38.1</val>
-            <val label="&gt;50.8" plot_val="">&gt;50.8</val>
-            <val label="&gt;76.2" plot_val="">&gt;76.2</val>
-            <val label="&gt;101.6" plot_val="">&gt;101.6</val>
+            <val label="&gt;0.2" plot_val="">&gt;0.2</val>
+            <val label="&gt;1" plot_val="">&gt;1</val>
+            <val label="&gt;2" plot_val="">&gt;2</val>
+            <val label="&gt;5" plot_val="">&gt;5</val>
+            <val label="&gt;10" plot_val="">&gt;10</val>
+            <val label="&gt;15" plot_val="">&gt;15</val>
+            <val label="&gt;25" plot_val="">&gt;25</val>
+            <val label="&gt;35" plot_val="">&gt;35</val>
+            <val label="&gt;50" plot_val="">&gt;50</val>
+            <val label="&gt;75" plot_val="">&gt;75</val>
+            <val label="&gt;100" plot_val="">&gt;100</val>
         </indep>
         <agg_stat>
             <agg_ctc>true</agg_ctc>
@@ -73,12 +72,13 @@
         </agg_stat>
         <plot_stat>median</plot_stat>
         <tmpl>
-            <data_file>rgl_%FHR%h_ets.data</data_file>
-            <plot_file>rgl_%FHR%h_ets.png</plot_file>
-            <r_file>rgl_24h_ets.R</r_file>
-            <title>24h ETS, %FHR%h fcsts valid %VDAY1% - %VDAY2%</title>
+            <data_file>bias.data</data_file>
+            <plot_file>bias.png</plot_file>
+            <r_file>plot_bias.R</r_file>
+            <title>%REGION% BIAS, %ANL1%/%ANL2%/%ANL2% %VDAY1% - %VDAY2%</title>
             <x_label>Threshold (mm/day)</x_label>
-            <y1_label>ETS/GSS</y1_label>
+            <y1_label>BIAS</y1_label>
+            <y2_label/>
             <caption/>
             <job_title/>
             <keep_revisions>false</keep_revisions>
@@ -90,11 +90,14 @@
         <x_reverse>false</x_reverse>
         <num_stats>false</num_stats>
         <indy1_stag>false</indy1_stag>
+        <indy2_stag>false</indy2_stag>
         <grid_on>true</grid_on>
         <sync_axes>false</sync_axes>
         <dump_points1>false</dump_points1>
+        <dump_points2>false</dump_points2>
         <log_y1>false</log_y1>
-        <varianceinflationfactor>false</varianceinflationfactor>
+        <log_y2>false</log_y2>
+        <varianceinflationfactor>true</varianceinflationfactor>
         <plot_type>png16m</plot_type>
         <plot_height>8.5</plot_height>
         <plot_width>11</plot_width>
@@ -128,6 +131,20 @@
         <grid_col>#cccccc</grid_col>
         <grid_lwd>1</grid_lwd>
         <grid_x>listX</grid_x>
+        <x2tlab_orient>1</x2tlab_orient>
+        <x2tlab_perp>1</x2tlab_perp>
+        <x2tlab_horiz>0.5</x2tlab_horiz>
+        <x2tlab_size>0.8</x2tlab_size>
+        <x2lab_size>0.8</x2lab_size>
+        <x2lab_offset>-0.5</x2lab_offset>
+        <x2lab_align>0.5</x2lab_align>
+        <y2tlab_orient>1</y2tlab_orient>
+        <y2tlab_perp>0.5</y2tlab_perp>
+        <y2tlab_horiz>0.5</y2tlab_horiz>
+        <y2tlab_size>1</y2tlab_size>
+        <y2lab_size>1</y2lab_size>
+        <y2lab_offset>1</y2lab_offset>
+        <y2lab_align>0.5</y2lab_align>
         <legend_box>o</legend_box>
         <legend_inset>c(0, -.25)</legend_inset>
         <legend_ncol>3</legend_ncol>
@@ -141,15 +158,18 @@
         <plot_ci>c("none","none","none")</plot_ci>
         <show_signif>c(FALSE,FALSE,FALSE)</show_signif>
         <plot_disp>c(TRUE,TRUE,TRUE)</plot_disp>
-        <colors>c("#ff0000FF","#1e90ffFF","#a0522dFF")</colors>
+        <colors>c("#1e90ffFF","#ff0000FF","#b8860bFF")</colors>
         <pch>c(20,20,20)</pch>
         <type>c("b","b","b")</type>
         <lty>c(1,1,1)</lty>
         <lwd>c(2,2,2)</lwd>
         <con_series>c(1,1,1)</con_series>
         <order_series>c(1,2,3)</order_series>
+        <plot_cmd> abline(h=1)</plot_cmd>
         <legend>c("","","")</legend>
-        <y1_lim>c(0,0.7)</y1_lim>
+        <y1_lim>c()</y1_lim>
+        <x1_lim>c()</x1_lim>
         <y1_bufr>0.04</y1_bufr>
+        <y2_lim>c()</y2_lim>
     </plot>
 </plot_spec>

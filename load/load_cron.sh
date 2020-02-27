@@ -53,7 +53,7 @@ fi
 cd $dirvsdberly
 
 # erly prod: 
-for model in conusnest gfs hrrr nam rap 
+for model in conusnest conusnmmb gfs hrrr nam rap 
 do
   scp Ying.Lin@${proddell}:${prodvsdbdir}/${model}/${model}_${daym2}.vsdb .
 done
@@ -68,7 +68,7 @@ done
 cd $dirvsdb
 
 # late prod: 
-for model in conusnest gfs hrrr nam rap 
+for model in conusnest conusnmmb gfs hrrr nam rap 
 do
   scp Ying.Lin@${proddell}:${prodvsdbdir}/${model}/${model}_${daym9}.vsdb .
 done
