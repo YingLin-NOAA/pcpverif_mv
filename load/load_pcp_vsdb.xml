@@ -1,7 +1,7 @@
 <load_spec>
   <connection>
     <host>metviewer-dev-cluster.cluster-czbts4gd2wm2.us-east-1.rds.amazonaws.com:3306</host>
-    <database>mv_pcp_metplus</database>
+    <database>mv_pcp_vsdb</database>
     <user>rds_user</user>
     <password>rds_pwd</password>
     <management_system>aurora</management_system>
@@ -13,7 +13,7 @@
   <insert_size>1</insert_size>
   <mode_header_db_check>true</mode_header_db_check>
   <stat_header_db_check>true</stat_header_db_check>
-  <drop_indexes>false</drop_indexes>
+  <drop_indexes>true</drop_indexes>
   <apply_indexes>true</apply_indexes>
   <load_stat>true</load_stat>
   <load_mode>true</load_mode>
@@ -25,7 +25,7 @@
   <folder_tmpl>/base_dir/{type}</folder_tmpl>
     <load_val>
      <field name="type">
-       <val>stats.dir</val>
+       <val>vsdb</val>
      </field>
     </load_val>
   <load_xml>true</load_xml>

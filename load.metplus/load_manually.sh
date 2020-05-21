@@ -1,27 +1,16 @@
 #!/usr/bin/env bash
 set -x
 
+# Use this script to load stats outside of regular daily loading (e.g. when
+# an additional METplus run is made for a model for $vday, when stats for other
+# models have already been loaded to the MV server.  
 # 
-SCRIPTS=/gpfs/dell2/emc/verification/noscrub/Ying.Lin/awsmv
+# stats are already placed in $STATSWRK/stats.dir/ before running this script.
 
-STATSARCH=/gpfs/dell2/emc/verification/noscrub/Ying.Lin/metplus.stats
+SCRIPTS=/gpfs/dell2/emc/verification/noscrub/Ying.Lin/awsmv
 STATSWRK=/gpfs/dell2/ptmp/Ying.Lin/awsload.metplus
 
-if [ $# -eq 0 ]; then
-  vday=`date +%Y%m%d -d "2 days ago"`
-else
-  vday=$1
-fi
-
-if [ -d $STATSWRK/stats.dir ]; then
-  rm -rf $STATSWRK/stats.dir/*
-else
-  mkdir -p $STATSWRK/stats.dir
-fi
-
 cd $STATSWRK/stats.dir
-
-cp -p $STATSARCH/$vday/*.stat . 
 
 for file in `ls -1 *ECMWF*.stat`
 do
