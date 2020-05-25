@@ -11,7 +11,7 @@ for day in `ls -1 | grep 20`
 do
   if [ $day -ge $day1 -a $day -le $day2 ];
   then
-    cp $day/*.stat $tmpdir/
+    cp $day/*.stat $tmpdir/.
   fi
 done
 
