@@ -25,12 +25,24 @@ vday2=20190416
 vday1dash=${vday1:0:4}-${vday1:4:2}-${vday1:6:2}
 vday2dash=${vday2:0:4}-${vday2:4:2}-${vday2:6:2}
 
+# ETS:
+for fhr in 60 
+do 
+  cat $ylscripts/rgl_ets_diff_conf_interval.xml \
+    | sed "s/%VDAY1%/$vday1dash/g"    \
+    | sed "s/%VDAY2%/$vday2dash/g"    \
+    | sed "s/%FHR%/$fhr/g"    \
+    > $wrkdir/scripts/plt_rgl_ets.xml
+
+  $AWSMV/mv_batch_on_aws.sh ying.lin $wrkdir/plots $wrkdir/scripts/plt_rgl_ets.xml
+done
+
 # FSS vs. HSIZE:
 for thresh in 005.0
 do
   for fhour in 60
   do 
-    cat $ylscripts/rgl_fss06_v_hsize_conf_int.xml \
+    cat $ylscripts/rgl_fss06_v_hsize_diff_conf_int.xml \
         | sed "s/%VDAY1%/$vday1dash/g"    \
         | sed "s/%VDAY2%/$vday2dash/g"    \
         | sed "s/%THRESH%/$thresh/g"    \
@@ -41,18 +53,11 @@ do
   done
 done
 
-for fhr in 36 60 
-do 
-  cat $ylscripts/rgl_ets_conf_interval.xml \
-    | sed "s/%VDAY1%/$vday1dash/g"    \
-    | sed "s/%VDAY2%/$vday2dash/g"    \
-    | sed "s/%FHR%/$fhr/g"    \
-    > $wrkdir/scripts/plt_rgl_ets.xml
+exit
 
-  $AWSMV/mv_batch_on_aws.sh ying.lin $wrkdir/plots $wrkdir/scripts/plt_rgl_ets.xml
-done
 
-# FSS vs. fcst hour:
+
+
 
 
 
