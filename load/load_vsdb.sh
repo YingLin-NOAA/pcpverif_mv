@@ -5,39 +5,34 @@ set -x
 
 # also can run interactively with an argument (day0)
 
-prodvsdbdir=/gpfs/dell1/nco/ops/com/verf/prod/vsdb/precip
- devvsdbdir=/gpfs/dell2/ptmp/Ying.Lin/verf.dat/vsdb
+prdvsdbdir=/gpfs/dell1/nco/ops/com/verf/prod/vsdb/precip
+devvsdbdir=/gpfs/dell2/ptmp/Ying.Lin/verf.dat/vsdb
 
 PTMP=/gpfs/dell2/ptmp/Ying.Lin/awsload
 dirvsdb=$PTMP/vsdb
 
-for dir in $dirvsdberly $dirvsdb
-do
-  if [ -d $dir ]
-  then
-    rm -f $dir/*
-  else
-    mkdir -p $dir
-  fi
-done
+if [ -d $dirvsdb ]
+then
+  rm -f $dirvsdb/*
+else
+  mkdir -p $dirvsdb
+fi
 
 if [ $# -eq 0 ]; then
   daym9=`date +%Y%m%d -d "9 day ago"`
 else
-  day0=$1
-  FINDDATE=/gpfs/dell1/nco/ops/nwprod/prod_util.v1.1.2/ush/finddate.sh
-  daym9=`$FINDDATE $day0 d-9`
+  daym9=$1
 fi
 
 # prod vsdbs:
-cp {prodvsdbdir}/*/*_${daym9}.vsdb .
+cp ${prdvsdbdir}/*/*_${daym9}.vsdb $dirvsdb/.
 
 # dev vsdbs:
-cp $devvsdbdir/*/*_${daym9}.vsdb .
+cp $devvsdbdir/*/*_${daym9}.vsdb $dirvsdb/.
   
 # Now load to AWS MV:
 # $AWSMV defined in .bashrc.
 STATS=$PTMP
-$AWSMV/mv_load_to_aws.sh ying.lin $STATS $AWSMV/load/load_pcp_add.xml
+$AWSMV/mv_load_to_aws.sh ying.lin $STATS $AWSMV/load/load_pcp_vsdb.xml
 
 exit
